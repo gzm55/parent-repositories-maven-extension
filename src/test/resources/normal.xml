@@ -1,0 +1,28 @@
+<repositories>
+  <repository>
+    <id>idA</id>
+    <name>nameA</name>
+    <url>urlA</url>
+  </repository>
+  <repository>
+    <id>idB</id>
+    <name>nameB</name>
+    <url>urlB</url>
+    <releases>
+      <updatePolicy>never</updatePolicy>
+    </releases>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+  </repository>
+  <repository>
+    <id>idC</id>
+    <name>nameC</name>
+    <url>urlC</url>
+    <releases>
+      <enabled>true</enabled>  
+      <updatePolicy>always</updatePolicy>  
+      <checksumPolicy>warn</checksumPolicy>
+    </releases>
+  </repository>
+</repositories>
