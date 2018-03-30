@@ -53,6 +53,12 @@ en.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-container-default</artifactId>
+      <version>1.7.1</version>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
 
