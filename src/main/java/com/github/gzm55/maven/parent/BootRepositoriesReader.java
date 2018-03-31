@@ -8,7 +8,7 @@ import java.io.SequenceInputStream;
 import java.io.ByteArrayInputStream;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Collections;
 
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.io.ModelReader;
@@ -18,7 +18,6 @@ import org.codehaus.plexus.component.annotations.Requirement;
 
 @Component( role = BootRepositoriesReader.class )
 public class BootRepositoriesReader {
-  private static final String XML_FILE = null;
   private static final String PRE_XML  = "<project>" +
                                            "<modelVersion>4.0.0</modelVersion>" +
                                            "<groupId>fake-group</groupId>" +
@@ -36,6 +35,9 @@ public class BootRepositoriesReader {
   {
     if ( input == null ) {
       throw new IllegalArgumentException("input file missing");
+    }
+    if (!input.isFile()) {
+      return Collections.emptyList();
     }
 
     final InputStream preModeStream  = new ByteArrayInputStream(PRE_XML.getBytes("UTF-8"));

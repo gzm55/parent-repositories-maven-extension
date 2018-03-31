@@ -17,9 +17,9 @@ en.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <!-- support Java 5 + maven [3.0, 3.1.1] in runtime -->
-    <project.runtime-jdk.min-version>1.5</project.runtime-jdk.min-version>
-    <project.runtime-maven.min-version>3.0</project.runtime-maven.min-version>
+    <!-- support Java 7 + maven [3.3.1, ) in runtime -->
+    <project.runtime-jdk.min-version>1.7</project.runtime-jdk.min-version>
+    <project.runtime-maven.min-version>3.3.1</project.runtime-maven.min-version>
 
     <!-- requirement for build this extension -->
     <project.buildtime-jdk.min-version>1.8</project.buildtime-jdk.min-version>

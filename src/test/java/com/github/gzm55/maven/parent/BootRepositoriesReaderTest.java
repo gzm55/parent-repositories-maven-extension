@@ -32,6 +32,20 @@ public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
     assertEquals("input file missing", e.getMessage());
   }
 
+  @DisplayName("test fake input")
+  @Test
+  void testFakeInput() throws IOException {
+    final File file = new File("fake.xml");
+
+    final BootRepositoriesReader reader = lookup(BootRepositoriesReader.class);
+    assertNotNull(reader);
+
+    final List<Repository> l = reader.read(file);
+    assertNotNull(l);
+
+    assertEquals(0, l.size());
+  }
+
   @DisplayName("test empty input")
   @Test
   void testEmptyInput() throws IOException {
@@ -115,11 +129,6 @@ public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
     assertRepositoryEquals(a, l.get(0));
     assertRepositoryEquals(b, l.get(1));
     assertRepositoryEquals(c, l.get(2));
-
-    //expected.add(a);
-    //expected.add(b);
-    //expected.add(c);
-    //assertIterableEquals(expected, l);
   }
 
   private void assertRepositoryEquals(final Repository e, final Repository r) {
