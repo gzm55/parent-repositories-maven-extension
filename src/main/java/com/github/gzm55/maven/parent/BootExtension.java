@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Named;
+import javax.inject.Inject;
+
 import org.apache.maven.AbstractMavenLifecycleParticipant;
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -13,20 +16,18 @@ import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.model.Repository;
 import org.apache.maven.project.ProjectBuildingHelper;
 import org.apache.maven.project.ProjectBuildingRequest;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
-import org.codehaus.plexus.logging.Logger;
 
 
 /**
  * Inject parents bootstrap repositories into the current maven session.
  */
-@Component(role = AbstractMavenLifecycleParticipant.class, hint = "parent-repo")
+//@Component(role = AbstractMavenLifecycleParticipant.class, hint = "parent-repo")
+@Named("parent-repo")
 public class BootExtension extends AbstractMavenLifecycleParticipant {
-  @Requirement
+  @Inject
   BootRepositoriesReader reader;
 
-  @Requirement
+  @Inject
   ProjectBuildingHelper buildHelper;
 
   private static final String REPOSITORIES_FILENAME = ".mvn/parent-repositories.xml";

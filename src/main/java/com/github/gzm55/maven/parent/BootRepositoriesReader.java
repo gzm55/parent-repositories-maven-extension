@@ -10,13 +10,13 @@ import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Collections;
 
+import javax.inject.Named;
+import javax.inject.Inject;
+
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.io.ModelReader;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
-
-@Component( role = BootRepositoriesReader.class )
+@Named
 public class BootRepositoriesReader {
   private static final String PRE_XML  = "<project>" +
                                            "<modelVersion>4.0.0</modelVersion>" +
@@ -26,7 +26,7 @@ public class BootRepositoriesReader {
   private static final String POST_XML = "</project>";
 
 
-  @Requirement
+  @Inject
   private ModelReader reader;
 
 

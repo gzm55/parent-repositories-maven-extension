@@ -17,11 +17,21 @@ import org.apache.maven.model.RepositoryPolicy;
 
 import com.github.gzm55.sisu.plexus.PlexusJUnit5TestCase;
 
+import org.codehaus.plexus.PlexusConstants;
+import org.codehaus.plexus.ContainerConfiguration;
+
 /**
  * Tests {@code BootRepositoriesReader}.
  */
 public class BootRepositoriesReaderTest extends PlexusJUnit5TestCase
 {
+  @Override
+  protected void customizeContainerConfiguration(final ContainerConfiguration configuration)
+  {
+    // scan the jsr330 compontents
+    configuration.setClassPathScanning(PlexusConstants.SCANNING_INDEX);
+  }
+
   @DisplayName("test null input")
   @Test
   void testNullInput() {
