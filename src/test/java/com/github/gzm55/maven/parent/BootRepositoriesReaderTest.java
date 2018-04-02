@@ -15,16 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.apache.maven.model.Repository;
 import org.apache.maven.model.RepositoryPolicy;
 
-import org.codehaus.plexus.PlexusJUnit4TestCase;
+import com.github.gzm55.sisu.plexus.PlexusJUnit5TestCase;
 
 /**
  * Tests {@code BootRepositoriesReader}.
  */
-public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
+public class BootRepositoriesReaderTest extends PlexusJUnit5TestCase
 {
-  @BeforeEach public void beforeTest() throws Exception { super.beforeTest(); }
-  @AfterEach  public void afterTest()  throws Exception { super.afterTest(); }
-
   @DisplayName("test null input")
   @Test
   void testNullInput() {
@@ -34,7 +31,7 @@ public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
 
   @DisplayName("test fake input")
   @Test
-  void testFakeInput() throws IOException {
+  void testFakeInput() throws Exception {
     final File file = new File("fake.xml");
 
     final BootRepositoriesReader reader = lookup(BootRepositoriesReader.class);
@@ -42,13 +39,12 @@ public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
 
     final List<Repository> l = reader.read(file);
     assertNotNull(l);
-
     assertEquals(0, l.size());
   }
 
   @DisplayName("test empty input")
   @Test
-  void testEmptyInput() throws IOException {
+  void testEmptyInput() throws Exception {
     final File file = new File(getClass().getClassLoader().getResource("empty.xml").getFile());
 
     final BootRepositoriesReader reader = lookup(BootRepositoriesReader.class);
@@ -62,7 +58,7 @@ public class BootRepositoriesReaderTest extends PlexusJUnit4TestCase
 
   @DisplayName("test normal input")
   @Test
-  void testNormalInput() throws IOException {
+  void testNormalInput() throws Exception {
     final File file = new File(getClass().getClassLoader().getResource("normal.xml").getFile());
     final List<Repository> l = lookup(BootRepositoriesReader.class).read(file);
     assertNotNull(l);

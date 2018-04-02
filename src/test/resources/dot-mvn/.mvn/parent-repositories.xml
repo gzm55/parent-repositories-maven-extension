@@ -1,0 +1,7 @@
+<repositories>
+  <repository>
+    <id>test-repo</id>
+    <name>Test Repo</name>
+    <url>http://test.repo</url>
+  </repository>
+</repositories>

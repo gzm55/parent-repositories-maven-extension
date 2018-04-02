@@ -24,9 +24,6 @@ import org.codehaus.plexus.logging.Logger;
 @Component(role = AbstractMavenLifecycleParticipant.class, hint = "parent-repo")
 public class BootExtension extends AbstractMavenLifecycleParticipant {
   @Requirement
-  Logger logger;
-
-  @Requirement
   BootRepositoriesReader reader;
 
   @Requirement
@@ -54,6 +51,9 @@ public class BootExtension extends AbstractMavenLifecycleParticipant {
 
     try {
       final List<Repository> pomBootRepos = reader.read(new File(basedir, REPOSITORIES_FILENAME));
+      if (pomBootRepos.isEmpty()) {
+        return;
+      }
       final List<ArtifactRepository> bootRepos =
           buildHelper.createArtifactRepositories(pomBootRepos, buildRequest.getRemoteRepositories(), buildRequest);
 
