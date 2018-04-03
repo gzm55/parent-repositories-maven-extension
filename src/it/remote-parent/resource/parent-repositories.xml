@@ -1,0 +1,6 @@
+<repositories>
+  <repository>
+    <id>test-remote-repo</id>
+    <url>file://@project.build.directory@/its/remote-parent/repo</url>
+  </repository>
+</repositories>
