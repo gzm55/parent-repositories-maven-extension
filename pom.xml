@@ -148,6 +148,30 @@
 	  <cloneClean>false</cloneClean> <!-- workaround MINVOKER-117, not cleanup the filtered files -->
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <executions>
+          <execution>
+            <id>flatten</id>
+	    <phase>prepare-package</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+	    <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <flattenMode>oss</flattenMode>
+	</configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
