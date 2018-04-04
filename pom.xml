@@ -27,7 +27,7 @@
 
   <scm>
     <connection>scm:git:git://github.com/gzm55/parent-repositories-maven-extension.git</connection>
-    <developerConnection>scm:git:ssh://github.com:gzm55/parent-repositories-maven-extension.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:gzm55/parent-repositories-maven-extension.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/gzm55/parent-repositories-maven-extension/tree/master</url>
   </scm>
