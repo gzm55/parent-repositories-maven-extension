@@ -13,8 +13,7 @@ cache:
   directories:
   - "$HOME/.m2"
 
-install:
-- true
+install: skip
 
 script:
 - ./mvnw -B clean install
@@ -27,4 +26,16 @@ jobs:
     - repo = gzm55/parent-repositories-maven-extension
     - branch = master
     - type != pull_request
+    before_script:
+    - ./mvnw -B -q exec:exec -Dexec.executable=echo -Dexec.args='${project.version}' | grep -q -- '-SNAPSHOT$' || { echo "Skip
+ non SNAPSHOT commits"; travis_terminate 0; }
     script: ./mvnw -B -DskipTests -Dinvoker.skip -gs .mvn/cd-settings.xml deploy
+  - stage: deploy
+    jdk: oraclejdk8
+    if:
+    - repo = gzm55/parent-repositories-maven-extension
+    - tag IS present
+    before_script:
+    - ./mvnw -B -q exec:exec -Dexec.executable=echo -Dexec.args='${project.version}' | grep -v -q -- '-SNAPSHOT$' || { echo "Skip
+ SNAPSHOT commits"; travis_terminate 0; }
+    script: ./mvnw -B -DskipTests -Dinvoker.skip -gs .mvn/cd-settings.xml -P release-profile deploy
