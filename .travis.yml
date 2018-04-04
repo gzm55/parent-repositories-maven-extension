@@ -5,12 +5,18 @@ jdk:
 - oraclejdk8
 - oraclejdk9
 
+env:
+  global:
+  - secure: FjGuha05PpiexLlb2/50lS4qoMr7km9LqogagBRKBrlVmhaZih9v0igm5HSiUnZuJeCup2kCQophHU0mw9RO4huB1Ssyn/g/dUkRaSh4t5P3pwris2KG1kXUUDg2MRH83jEEOkYCzOlDHomEDBBUd3s8Gc+S+8/AsAUvRHCrLdaUudmvSC0PDlZ0K47aKvt+V78TXbZrDju8uMKMK/KTPr6PrO60BUctt0A6B9V6ikBVbqPboYZY9PRDZ5O8CtwZaBI7ASRNboZH+rwSFoYmWNOH44tHJluzG520EeoSpZalePC9z59lv/4ybefB8KBuItTZ/9c6nBtoTUnO9WDQAT5wleTwoOVyq0YWoAbaV7ea7coTEAKgthItosP4rWvy5ukzIl/bg1Qua7SLh/z00uL8f41S8fP4GVYrynSdZLKe3qNxOlMwYjTnYrQe9r2Gfxt7wlQgc8JGB8OcDaOl7x+8pvDag9Dpen1Fj3N4zBnCxYj8HSoz1zU6A9LoxRsDmHppRzGBqD+Md96WR/4gK3GhpLfOj/oubZQkFQJ9zJAq/TV2g3VPiottbd8D44vcxFjKiUcvX1XiC7d4rNt4x3kNzSaALppCStp/TSLZO4ZXwEk2uC9wkdueTNsNMaeGQmNcPlT/5IgGn91M6A0nr0abLC3VEGKsFfQZGzAwM1A=
+
 cache:
   directories:
-  - $HOME/.m2
+  - "$HOME/.m2"
+
+install:
 
 script:
-- ./mvnw test
+- ./mvnw -B clean insall
 
 jobs:
   include:
@@ -20,4 +26,4 @@ jobs:
     - repo = gzm55/parent-repositories-maven-extension
     - branch = master
     - type != pull_request
-    script: ./mvnw -DskipTests deploy
+    script: ./mvnw -B -DskipTests -Dinvoker.skip -gs .mvn/cd-settings.xml deploy
