@@ -14,9 +14,10 @@ cache:
   - "$HOME/.m2"
 
 install:
+- true
 
 script:
-- ./mvnw -B clean insall
+- ./mvnw -B clean install
 
 jobs:
   include:
