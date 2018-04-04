@@ -9,8 +9,15 @@ cache:
   directories:
   - $HOME/.m2
 
-before_install:
-- cat $HOME/.m2/settings.xml
-
 script:
 - ./mvnw test
+
+jobs:
+  include:
+  - stage: deploy
+    jdk: oraclejdk8
+    if:
+    - repo = gzm55/parent-repositories-maven-extension
+    - branch = master
+    - type != pull_request
+    script: ./mvnw -DskipTests deploy
