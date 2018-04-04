@@ -7,6 +7,9 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <name>Extension for Resolving Parent Artifacts</name>
+  <description>This extension could inject a list custom defined repositories
+  for resolving parent artifacts.</description>
+  <url>https://github.com/gzm55/parent-repositories-maven-extension</url>
 
   <licenses>
     <license>
@@ -14,6 +17,32 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <name>James Z.M. Gao</name>
+      <email>gaozm55@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/gzm55/parent-repositories-maven-extension.git</connection>
+    <developerConnection>scm:git:ssh://github.com:gzm55/parent-repositories-maven-extension.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/gzm55/parent-repositories-maven-extension/tree/master</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/gzm55/parent-repositories-maven-extension/issues</url>
+  </issueManagement>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -129,9 +158,9 @@
             </goals>
           </execution>
         </executions>
-	<configuration>
+        <configuration>
           <keepBlankLines>true</keepBlankLines>
-	</configuration>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -175,7 +204,8 @@
         <configuration>
           <localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>
           <settingsFile>${project.basedir}/src/it/settings.xml</settingsFile>
-          <cloneClean>false</cloneClean> <!-- workaround MINVOKER-117, not cleanup the filtered files -->
+          <cloneClean>false</cloneClean>
+          <!-- workaround MINVOKER-117, not cleanup the filtered files -->
         </configuration>
       </plugin>
       <plugin>
@@ -199,9 +229,59 @@
           </execution>
         </executions>
         <configuration>
-          <flattenMode>oss</flattenMode>
+          <flattenMode>ossrh</flattenMode>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
