@@ -27,4 +27,5 @@ jobs:
     if: repo = gzm55/parent-repositories-maven-extension AND tag =~ ^parent-repositories-extension-[0-9]+(\.[0-9]+)+$
     before_script:
     - ./mvnw -B -q exec:exec -Dexec.executable=echo -Dexec.args='${project.version}' | grep -v -q -- '-SNAPSHOT$' || { echo "Skip SNAPSHOT commits"; travis_terminate 0; }
+    - gpg --batch --fast-import --passphrase-fd 0 <(openssl aes-256-cbc -K $encrypted_459a6dea2be2_key -iv $encrypted_459a6dea2be2_iv -in .cd/sign.asc.enc -d) <<< "$GPG_PASSWORD"
     script: ./mvnw -B -DskipTests -Dinvoker.skip -gs .mvn/cd-settings.xml -P release-profile deploy
