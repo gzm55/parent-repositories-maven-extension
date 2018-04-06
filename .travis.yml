@@ -9,13 +9,7 @@ cache:
   directories:
   - "$HOME/.m2"
 
-install:
-        - which gpg
-        - gpg --version
-        - gpg -k
-        - which gpg2
-        - gpg2 --version
-        - gpg2 -k
+install: skip
 
 script:
 - ./mvnw -B clean install
