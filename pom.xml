@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.gzm55.maven</groupId>
   <artifactId>parent-repositories-extension</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6-SNAPSHOT</version>
 
   <name>Extension for Resolving Parent Artifacts</name>
   <description>This extension could inject a list custom defined repositories
@@ -28,7 +28,7 @@
   <scm>
     <connection>scm:git:git://github.com/gzm55/parent-repositories-maven-extension.git</connection>
     <developerConnection>scm:git:git@github.com:gzm55/parent-repositories-maven-extension.git</developerConnection>
-    <tag>parent-repositories-extension-0.0.5</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/gzm55/parent-repositories-maven-extension/tree/master</url>
   </scm>
 
