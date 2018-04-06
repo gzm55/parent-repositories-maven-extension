@@ -12,8 +12,10 @@ cache:
 install:
         - which gpg
         - gpg --version
+        - gpg -k
         - which gpg2
         - gpg2 --version
+        - gpg2 -k
 
 script:
 - ./mvnw -B clean install
