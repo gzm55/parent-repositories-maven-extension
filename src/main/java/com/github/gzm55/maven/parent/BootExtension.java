@@ -21,7 +21,6 @@ import org.apache.maven.project.ProjectBuildingRequest;
 /**
  * Inject parents bootstrap repositories into the current maven session.
  */
-//@Component(role = AbstractMavenLifecycleParticipant.class, hint = "parent-repo")
 @Named("parent-repo")
 public class BootExtension extends AbstractMavenLifecycleParticipant {
   @Inject
