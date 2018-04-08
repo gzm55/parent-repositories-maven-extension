@@ -297,10 +297,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <gpg.keyname>${env.GPG_KEYID}</gpg.keyname>
-        <gpg.passphrase>${env.GPG_PASSWORD}</gpg.passphrase>
-      </properties>
     </profile>
     <profile>
       <id>gpg-2.1-profile</id>
